@@ -90,7 +90,7 @@ public:
 	/*
 	* Virtual destructor
 	*/
-	virtual ~IEvent();
+	virtual ~IEvent(){};
 };
 
 #endif

@@ -89,7 +89,10 @@
   <ItemGroup>
     <ClInclude Include="EulerAngles.h" />
     <ClInclude Include="EventInterface.h" />
+    <ClInclude Include="EventInterfacing.h" />
+    <ClInclude Include="EventInterfacing1.h" />
     <ClInclude Include="filter.h" />
+    <ClInclude Include="RVC.h" />
     <ClInclude Include="RVCInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

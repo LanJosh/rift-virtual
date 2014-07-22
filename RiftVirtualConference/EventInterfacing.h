@@ -1,0 +1,55 @@
+#include "EventInterface.h"
+
+class EventInterfacing : IEvent
+{
+private:
+	float walkAcc;
+	float walkDecc;
+	IRift * rift;
+
+public:
+	EventInterfacing::EventInterfacing(IRift * connection, float accThreshold, float deccThreshold);
+
+	EventInterfacing::~EventInterfacing();
+
+	/*
+	* Sets threshold values for acceleration and decceleration.
+	*
+	* @updates walkAcc, walkDecc
+	*	Updates walkAcc and walkDecc to the values passed in.
+	*		walkAcc = acc && walkDecc = decc
+	*/
+	void setThreshold(float acc, float decc);
+
+	/*
+	* Finds and returns threshold values for acceleration to walking.
+	*
+	* @requires 
+	*	Acceleration data is valid
+	*		accData.length > 0 && accData != NULL
+	*
+	* @return 
+	*	A threshold value that signifies that a person has begun walking
+	*/
+	float findAccelerationThreshold(std::vector<float> & accData);
+
+	/*
+	* Finds and returns threshold values for decceleration to stop.
+	*
+	* @return
+	*	A threshold value that signifies that a person has begun to stop walking
+	*/
+	float findDeccelerationThreshold(std::vector<float> accData);
+
+	/*
+	* Simple implementation of movement in OpenSim. If threshold values are broken, we
+	* move the avatar in virtual world by "pressing" a key.
+	*
+	*/
+	void move();
+
+	bool pedometer();
+
+	bool pedometer(IRift * rift);
+	
+};

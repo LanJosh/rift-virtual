@@ -44,5 +44,14 @@
     <ClInclude Include="EventInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EventInterfacing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventInterfacing1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RVC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
