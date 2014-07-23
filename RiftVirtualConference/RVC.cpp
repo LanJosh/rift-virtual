@@ -4,14 +4,14 @@
 
 using namespace OVR;
 	/*
-	* Initializes the connection to the Oculus Rift. More about this and clear is shown in the Minimal Oculus 
-	* tutorial for SDK 0.2.5c. This is deprecated as of DK2 (SDK 0.3.x), but at the time of implementation we
-	* did not have DK2s and therefore choose not to use SDK 0.3.x. If new Oculus Rifts are bought by the 
-	* lab or the consumer version is release it is EXTREMELY important to update this program. Though direct changes
-	* are clearly needed within these functions, it is likely this entire program will be
-	* deprecated by the time of release (as the API will change on release). All conventions and algorithms will likely hold,
-	* updates should just be rolling in new functions/updating deprecated ones.
-	* 
+	 Initializes the connection to the Oculus Rift. More about this and clear is shown in the Minimal Oculus 
+	 tutorial for SDK 0.2.5c. This is deprecated as of DK2 (SDK 0.3.x), but at the time of implementation we
+	 did not have DK2s and therefore choose not to use SDK 0.3.x. If new Oculus Rifts are bought by the 
+	 lab or the consumer version is release it is EXTREMELY important to update this program. Though direct changes
+	 are clearly needed within these functions, it is likely this entire program will be
+	 deprecated by the time of release (as the API will change on release). All conventions and algorithms will likely hold,
+	 updates should just be rolling in new functions/updating deprecated ones.
+	 
 	*/
 	void RVC::init()
 	{
@@ -38,7 +38,7 @@ using namespace OVR;
 	};
 
 	/*
-	* Clears and destroys connection to the Oculus Rift. See contract for init().
+		Clears all connections to the Oculus Rift and deleted the object attached to the sensors.
 	*/
 	void RVC::clear()
 	{
@@ -52,7 +52,7 @@ using namespace OVR;
 	};
 
 	/*
-	* Constructor. Initializes Rift connection.
+	 Constructor. Initializes Rift connection.
 	*/
 	RVC::RVC()
 	{
@@ -60,7 +60,7 @@ using namespace OVR;
 	};
 
 	/*
-	* Destructor. Closes and destroys Rift connection.
+	 Destructor. Closes and destroys Rift connection.
 	*/
 	RVC::~RVC()
 	{
@@ -68,17 +68,11 @@ using namespace OVR;
 	};
 
 	/*
-	* Returns a struct of yaw, pitch, and roll. 
-	*
-	* For future interns: This is probably not going to be used for anything past testing purposes,
-	* though it should be used extensively during testing for getting Euler angles and printing them
-	* with a reasonable amount of code. 
-	*
-	* @return ang
-	*	EulerAngles struct such that ang.yaw, ang.pitch, and ang.roll will correspond to 
-	*	Euler angles computed from the quaternion computed at the time of the function call.
-	*	This quaternion will almost always not be the quarternion in real time and such the
-	*	Euler angles will not be the angles in real time either.
+	 Returns a struct of yaw, pitch, and roll. 
+		
+	 For future interns: This is probably not going to be used for anything past testing purposes,
+	 though it should be used extensively during testing for getting Euler angles and printing them
+	 with a reasonable amount of code. 
 	*/
 	EulerAngles RVC::RawEulerAngles()
 	{
@@ -94,16 +88,13 @@ using namespace OVR;
 	};
 
 	/*
-	* Returns raw acceleration data from the Oculus Rift. 
-	*
-	* For future interns: This method is implemented soley to keep class
-	* convention. This should almost never be called outside of testing.
-	* Keep in mind that this is NOT corrected for gravity. Be sure to understand
-	* the Equivalence Principle before attempting to use this or you will likely
-	* receive bad results
-	* 
-	* @return 
-	*	The raw acceleration data from the Oculus Rift. 
+	 Returns raw acceleration data from the Oculus Rift. 
+	
+	 For future interns: This method is implemented soley to keep class
+	 convention. This should almost never be called outside of testing.
+	 Keep in mind that this is NOT corrected for gravity. Be sure to understand
+	 the Equivalence Principle before attempting to use this or you will likely
+	 receive bad results
 	*/
 	Vector3f RVC::RawAcceleration()
 	{
@@ -111,14 +102,11 @@ using namespace OVR;
 	};
 
 	/*
-	* Returns raw orientation data from the Oculus Rift.
-	*
-	* For future interns: This is implemented for conventions sake
-	* and should almost never be used outside of testing. Before using this
-	* consider using CorrectedAcceleration() or RawEulerAngles().
-	*
-	* @return
-	*	Quaternion representing a rotation matrix.
+	 Returns raw orientation data from the Oculus Rift.
+	
+	 For future interns: This is implemented for conventions sake
+	 and should almost never be used outside of testing. Before using this
+	 consider using CorrectedAcceleration() or RawEulerAngles().
 	*/
 	Quatf RVC::RawOrientation()
 	{
@@ -126,12 +114,7 @@ using namespace OVR;
 	};
 
 	/*
-	* Corrects acceleration by adding a pseudoforce opposite of gravity. This is used to eliminate
-	* the affect of gravity when the Rift is tilted. A complementary filter is also used to filter the
-	* data before adding corrections
-	*
-	* @return acc
-	*	The corrected acceleration vector.
+	 Returns complementary filtered linear acceleration.
 	*/
 	Vector3f RVC::CorrectedAcceleration()
 	{

@@ -1,6 +1,6 @@
 #include "EventInterfacing.h"
 
-EventInterfacing::EventInterfacing(IRift * connection, float accThreshold, float deccThreshold)
+EventInterfacing::EventInterfacing(IRift *connection, float accThreshold, float deccThreshold)
 {
 	this->rift = connection;
 	this->walkAcc = accThreshold;
@@ -9,15 +9,13 @@ EventInterfacing::EventInterfacing(IRift * connection, float accThreshold, float
 
 EventInterfacing::~EventInterfacing()
 {
-	this->rift->clear();
-}
+	this->rift = NULL;
+	this->walkAcc = NULL;
+	this->walkDecc = NULL;
+};
 
 /*
-* Sets threshold values for acceleration and decceleration.
-*
-* @updates walkAcc, walkDecc
-*	Updates walkAcc and walkDecc to the values passed in.
-*		walkAcc = acc && walkDecc = decc
+ Changes the standrad threshold for determining if we have started or stopping walking to the arguments.
 */
 void EventInterfacing::setThreshold(float acc, float decc)
 {
@@ -26,26 +24,26 @@ void EventInterfacing::setThreshold(float acc, float decc)
 }
 
 /*
-* Finds and returns threshold values for acceleration to walking.
-*
-* @requires 
-*	Acceleration data is valid
-*		accData.length > 0 && accData != NULL
-*
-* @return 
-*	A threshold value that signifies that a person has begun walking
+ Finds and returns threshold values for acceleration to walking.
+
+ @requires 
+	Acceleration data is valid
+		accData.length > 0 && accData != NULL
+
+ @return 
+	A threshold value that signifies that a person has begun walking
 */
-float EventInterfacing::findAccelerationThreshold(std::vector<float> & accData)
+float EventInterfacing::findAccelerationThreshold(std::vector<float> accData)
 {
 	// TODO write algorithm to quickly find a threshold for beginning walking from a vector.
 	return 0;
 };
 
 /*
-* Finds and returns threshold values for decceleration to stop.
-*
-* @return
-*	A threshold value that signifies that a person has begun to stop walking
+ Finds and returns threshold values for decceleration to stop.
+
+ @return
+	A threshold value that signifies that a person has begun to stop walking
 */
 float EventInterfacing::findDeccelerationThreshold(std::vector<float> accData)
 {
@@ -54,9 +52,8 @@ float EventInterfacing::findDeccelerationThreshold(std::vector<float> accData)
 };
 
 /*
-* Simple implementation of movement in OpenSim. If threshold values are broken, we
-* move the avatar in virtual world by "pressing" a key.
-*
+  Sets up virtual keyboard. If walking we hit a keystroke corresponding to 
+  foward movement in the virtual world. 
 */
 void EventInterfacing::move()
 {
@@ -77,12 +74,12 @@ void EventInterfacing::move()
 			ip.ki.dwFlags = 0;
 			SendInput(1, &ip, sizeof(INPUT));
 			zAccel = rift->CorrectedAcceleration().z;
-		}
-	}
 
-	// Release key
-	ip.ki.dwFlags = KEYEVENTF_KEYUP;
-	SendInput(1, &ip, sizeof(INPUT));
+			// Release key
+			ip.ki.dwFlags = KEYEVENTF_KEYUP;
+			SendInput(1, &ip, sizeof(INPUT));
+		}
+	};
 };
 
 bool EventInterfacing::pedometer()

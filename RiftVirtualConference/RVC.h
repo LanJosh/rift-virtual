@@ -62,22 +62,22 @@ public:
 	/*
 	* Returns uncorrected and unfiltered Euler Angles. 
 	*/
-	EulerAngles RVC::RawEulerAngles();
+	EulerAngles RawEulerAngles();
 
 	/*
 	* Returns uncorected and unfiltered acceleration data from the Oculus Rift. 
 	*/
-	OVR::Vector3f RVC::RawAcceleration();
+	OVR::Vector3f RawAcceleration();
 
 	/*
 	* Returns unfiltered and uncorrected orientation data from the Oculus Rift.
 	*/
-	OVR::Quatf RVC::RawOrientation();
+	OVR::Quatf RawOrientation();
 
 	/*
 	* Returns corrected and filtered acceleration data from the Oculus Rift.
 	*/
-	OVR::Vector3f RVC::CorrectedAcceleration();
+	OVR::Vector3f CorrectedAcceleration();
 };
 
 #endif

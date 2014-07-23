@@ -27,7 +27,7 @@ std::pair<EulerAngles, OVR::Vector3f> ComFilter(std::pair<EulerAngles, OVR::Vect
 	//if (forceMagnitude > low && forceMagnitude < high)
 	//{
 	float pitchAcc = atan2(readings.second.y, readings.second.z);
-	float pitch = pitch * gyroWeight + pitchAcc * accWeight;
+	float pitch = readings.first.pitch * gyroWeight + pitchAcc * accWeight;
 	//}
 	readings.first.pitch = pitch;
 

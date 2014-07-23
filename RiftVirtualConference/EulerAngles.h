@@ -7,6 +7,10 @@
 * a clear naming convention. This should not be used over vector or array, or even just declaring three floats
 * unless readibility is necessary as using this will increase run time.
 */
+
+/*
+* Creates an object to store Euler Angles.
+*/
 struct EulerAngles
 {
 public:
