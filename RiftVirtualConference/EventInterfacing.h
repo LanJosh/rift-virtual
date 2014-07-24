@@ -1,3 +1,5 @@
+#ifndef EVENINTERFACING_H
+#define EVENTINTERFACING_H
 #include "EventInterface.h"
 
 class EventInterfacing : public IEvent
@@ -33,6 +35,10 @@ public:
 	void move();
 
 	/*
+	 Orients virtual body.
+	*/
+	void orientBody(IList *orientation);
+	/*
 	 Returns true if walking and false if not
 	*/
 	bool pedometer();
@@ -43,3 +49,4 @@ public:
 	bool pedometer(IRift * rift);
 	
 };
+#endif

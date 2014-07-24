@@ -1,4 +1,5 @@
 #include "EventInterfacing.h"
+#include "OrientationList.h"
 
 EventInterfacing::EventInterfacing(IRift *connection, float accThreshold, float deccThreshold)
 {
@@ -79,6 +80,40 @@ void EventInterfacing::move()
 			ip.ki.dwFlags = KEYEVENTF_KEYUP;
 			SendInput(1, &ip, sizeof(INPUT));
 		}
+	};
+};
+
+/*
+  Orients virtual body in response to the head position recorded
+  by the Oculus Rift.
+ */
+void EventInterfacing::orientBody(IList *orientation)
+{
+	// 15 degree change in yaw orientation corresponds to one keystroke in OpenSim
+	const int DEGREE_RATIO = 15;
+
+	// Determine position
+	EulerAngles ang = this->rift->RawEulerAngles();
+
+	// Change to position in list. We do this in order to create feasible
+	// thresholds--the Oculus is too sensitive for each degrees. The integer division
+	// here is intended. The reason for this is important and is left to you 
+	// to figure out (but is pretty simple).
+	int pos = ang.yaw / DEGREE_RATIO;
+
+	// Determine position as modeled in the list
+	int currPos = orientation->position();
+
+	// If we are ahead in the list, retreat until we are oriented.
+	while (currPos > pos)
+	{
+		orientation->retreat();
+	}  
+
+	// If we are behind in the list, advance until we are oriented.
+	while (currPos < pos)
+	{
+		orientation->advance();
 	};
 };
 

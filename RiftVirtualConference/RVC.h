@@ -1,7 +1,9 @@
 #ifndef RVC_H
 #define RVC_H
 #include "RVCInterface.h"
-#include "OVR.h"
+#include <string>
+#include <utility>
+#include <iostream>
 
 // Only using the namespace here because this class is made
 // strictly to communicate with the Rift.

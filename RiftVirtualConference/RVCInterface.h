@@ -2,11 +2,13 @@
 #define RVCINTERFACE_H
 #include "OVR.h"
 #include "EulerAngles.h"
-#include <string>
-#include <utility>
-#include <iostream>
 
 //Abstract base class
+
+/*
+Connection to an Oculus Rift. Provides information about
+head position from Oculus Rift.
+*/
 class IRift
 {
 public:
@@ -36,7 +38,7 @@ public:
 	virtual OVR::Vector3f RawAcceleration() = 0;
 
 	/*
-	 Return raw Euler angles from the Oculus Rift
+	 Return raw Euler angles in radians from the Oculus Rift
 	
 	 @requires
 		The Rift is connected properly

@@ -60,14 +60,6 @@ using namespace OVR;
 	};
 
 	/*
-	 Destructor. Closes and destroys Rift connection.
-	*/
-	RVC::~RVC()
-	{
-		this->clear();
-	};
-
-	/*
 	 Returns a struct of yaw, pitch, and roll. 
 		
 	 For future interns: This is probably not going to be used for anything past testing purposes,

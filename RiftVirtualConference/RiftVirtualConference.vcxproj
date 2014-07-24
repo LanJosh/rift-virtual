@@ -84,7 +84,9 @@
     <ClCompile Include="EventInterfacing1.cpp" />
     <ClCompile Include="filter.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="OrientationList.cpp" />
     <ClCompile Include="RVC.cpp" />
+    <ClCompile Include="Samples.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EulerAngles.h" />
@@ -92,8 +94,11 @@
     <ClInclude Include="EventInterfacing.h" />
     <ClInclude Include="EventInterfacing1.h" />
     <ClInclude Include="filter.h" />
+    <ClInclude Include="OListInterface.h" />
+    <ClInclude Include="OrientationList.h" />
     <ClInclude Include="RVC.h" />
     <ClInclude Include="RVCInterface.h" />
+    <ClInclude Include="Samples.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

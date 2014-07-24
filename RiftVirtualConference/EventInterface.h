@@ -1,14 +1,13 @@
-#ifndef EVENTINTERFACING_H
-#define EVENTINTERFACING_H
+#ifndef EVENTINTERFACE_H
+#define EVENTINTERFACE_H
 #include <vector>
 #include "RVCInterface.h"
-
+#include "OrientationList.h"
 class IEvent
 {
 public:
 	/*
 	 Sets the threshold value checking acceleration and decceleration.
-	
 	
 	 @param acc
 		The new value to be used as a threshold to determine if acceleration means we 
@@ -89,6 +88,15 @@ public:
 		There is a connection to OpenSim.
 	*/
 	virtual void move() = 0;
+
+	/*
+	 Orients the avatars body to the position 
+	 the position of the users head
+
+	 @requires
+		There is a connectino to OpenSim.
+	 */
+	virtual void orientBody(IList *orientation) = 0;
 
 	/*
 	 Virtual destructor

@@ -1,3 +1,5 @@
+#ifndef EVENTINTERFACING1_H
+#define EVENTINTERFACING1_H
 #include "EventInterface.h"
 
 class EventInterfacing1 : IEvent
@@ -51,3 +53,4 @@ public:
 	*/
 	bool pedometer();
 };
+#endif
