@@ -40,6 +40,8 @@ public:
 
 	// Return the current position
 	int position();
+
+	OList::OList();
 };
 
 #endif

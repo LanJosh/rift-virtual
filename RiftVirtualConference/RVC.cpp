@@ -10,8 +10,7 @@ using namespace OVR;
 	 lab or the consumer version is release it is EXTREMELY important to update this program. Though direct changes
 	 are clearly needed within these functions, it is likely this entire program will be
 	 deprecated by the time of release (as the API will change on release). All conventions and algorithms will likely hold,
-	 updates should just be rolling in new functions/updating deprecated ones.
-	 
+	 updates should just be rolling in new functions/updating deprecated ones. 
 	*/
 	void RVC::init()
 	{
@@ -57,6 +56,11 @@ using namespace OVR;
 	RVC::RVC()
 	{
 		this->init();
+	};
+
+	RVC::~RVC()
+	{
+		this->clear();
 	};
 
 	/*

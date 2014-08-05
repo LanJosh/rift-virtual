@@ -2,12 +2,18 @@
 #include "RVC.h"
 #include "EventInterfacing.h"
 #include "OrientationList.h"
+#include "Pedometer.h"
 #include <conio.h>
+#include <string>
+#include "EventInterfacing1.h"
 
 void Orientation()
 {
 	// Connect to rift
+	std::cout << "Connecting to Oculus Rift" << std::endl;
 	IRift *pRift = new RVC();
+	std::cout << "Getting acceleration data" << std::endl;
+	std::cout << "Printing acceleration data, press any key to exit" << std::endl;
 	while (true)
 	{
 		// Get the Euler angles. It is possible to get orientation
@@ -23,8 +29,10 @@ void Orientation()
 			<< " Yaw: " << OVR::RadToDegree(ang.yaw) << std::endl;
 		if (_kbhit())
 		{
+			std::cout << "End orientation sample" << std::endl;
+			delete pRift;
 			break;
-		}
+		};
 	};
 };
 
@@ -32,7 +40,9 @@ void Acceleration()
 {
 	std::cout << "Connecting to Oculus Rift" << std::endl;
 	IRift *pRift = new RVC();
-	std::cout << "Begin printing acceleration data" << std::endl;
+	std::cout << "Begin printing acceleration data" << std::endl
+	 << "rX is raw acceleration, cX is corrected acceleration" << std::endl
+	 << "Press any key to stop demo" << std::endl;
 	while (true)
 	{
 		// Again we use something from rift outside of the rift class.
@@ -51,6 +61,8 @@ void Acceleration()
 			<< "cZ: " << cAcc.z << std::endl;
 		if (_kbhit())
 		{
+			std::cout << "End acceleration sample" << std::endl;
+			delete pRift;
 			break;
 		}
 	};
@@ -103,8 +115,8 @@ void PeakAnalysisDemo()
 	IEvent *pEventHandler = new EventInterfacing(pRift, (float) -1, (float)-1.5);
 	
 	// Set up an infite loop to continually poll the event handler.
-	std::cout << "Begin Sync to Virtual World" << std::endl;
-	std::cout << "Press enter to exit Virtual Conferencing" << std::endl;
+	std::cout << "Begin sync to virtual world" << std::endl;
+	std::cout << "Press enter to exit virtual conferencing" << std::endl;
 	while (true)
 	{
 		// Tell the event handler to coordinate rift with virtual world. 
@@ -114,7 +126,6 @@ void PeakAnalysisDemo()
 		if (_kbhit())
 		{
 			std::cout << "Ending connection to virtual world" << std::endl;
-			pRift->clear();
 			delete pRift;
 			delete pEventHandler;
 			break;
@@ -122,7 +133,7 @@ void PeakAnalysisDemo()
 	};
 };
 
-void PeakAnalysisWithHeadtrackingDemo()
+void PeakAnalysisWithListHeadtrackingDemo()
 {
 	std::cout << "Connecting to Oculus Rift" << std::endl;
 	IRift *pRift = new RVC();
@@ -138,23 +149,53 @@ void PeakAnalysisWithHeadtrackingDemo()
 
 	// Set up an infite loop to continually poll the event handler.
 	std::cout << "Begin Sync to Virtual World" << std::endl;
-	std::cout << "Press enter to exit Virtual Conferencing" << std::endl;
-	while (true)
+	std::cout << "Press 'q' to quit Virtual Conferencing" << std::endl;
+	std::string sentinel;
+	do
 	{
 		// Tell the event handler to coordinate rift with virtual world. 
 		pEventHandler->move();
 
 		// Orient body with virtual world
 		pEventHandler->orientBody(pVirtRep);
-		// Allow the user to  exit!
-		if (_kbhit())
-		{
-			std::cout << "Ending connection to virtual world" << std::endl;
-			pRift->clear();
-			delete pRift;
-			delete pEventHandler;
-			delete pVirtRep;
-			break;
-		};
-	};
+		sentinel = _getch();
+	} while (sentinel != "q");
+};
+
+void HeadtrackingWithList()
+{
+	std::cout << "Setting up data representation" << std::endl;
+	IList *pOrient = new OList();
+	std::cout << "Connecting to Rift" << std::endl;
+	IRift *pRift = new RVC();
+	std::cout << "Creating interfacing" << std::endl;
+	IEvent *pEventHandler = new EventInterfacing(pRift, (float) -1, (float)-1.5);
+	std::cout << "Press enter to begin" << std::endl;
+	std::cin.get();
+
+	std::cout << "Printing data orientation value" << std::endl;
+	std::string sentinel;
+	do
+	{
+		pEventHandler->orientBody(pOrient);
+		std::cout << "position: " << pOrient->position() << std::endl;
+		sentinel = _getch();
+	} while (sentinel != "q");
+
+	std::cout << "Exiting Headtracking Demo" << std::endl;
+	delete pOrient;
+	delete pRift;
+	delete pEventHandler;
+};
+
+void PedometerDemo(){
+	std::cout << "Connecting to Oculus Rift" << std::endl;
+	IRift *pRift = new RVC();
+	std::cout << "Connecting to virtual world" << std::endl;
+	IEvent *pEventHandler = new EventInterfacing1(pRift, (float) -1, (float)-1.5);
+	std::string sentinel;
+	do 
+	{
+		pEventHandler->move();
+	} while (sentinel != "q");
 };

@@ -100,6 +100,9 @@
     <ClInclude Include="RVCInterface.h" />
     <ClInclude Include="Samples.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="OList.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

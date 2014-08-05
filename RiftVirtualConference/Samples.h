@@ -26,4 +26,14 @@ void PeakAnalysisDemo();
 */
 void PeakAnalysisWithHeadtrackingDemo();
 
+/*
+ Headtracking using the Orientation List object
+*/
+void HeadtrackingWithList();
+
+/*
+ Movement controlled by a pedometer algorithm instead of an inertial system.
+*/
+void PedometerDemo();
+
 #endif

@@ -38,15 +38,11 @@ public:
 	 Orients virtual body.
 	*/
 	void orientBody(IList *orientation);
-	/*
-	 Returns true if walking and false if not
-	*/
-	bool pedometer();
 
 	/*
 	 Returns true if walking and false if not
 	*/
-	bool pedometer(IRift * rift);
-	
+	bool pedometer(IRift * rift, Pedometer &pedo);
+
 };
 #endif

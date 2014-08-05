@@ -13,60 +13,95 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Event">
+      <UniqueIdentifier>{402e18ff-bb16-4f29-ae1f-e4e79cf72a35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EulerAngles">
+      <UniqueIdentifier>{7cf45be3-322e-4155-bfa0-65d5aa839615}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\VirtOrient">
+      <UniqueIdentifier>{e63f4f75-cd25-408e-8f7b-d3fc23939afa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Rift">
+      <UniqueIdentifier>{b31c14f9-249a-46cc-a7f8-f9f48b64ddfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Filters">
+      <UniqueIdentifier>{9c6a6ec3-2e2b-47b0-9765-5cb973d3c4ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Samples">
+      <UniqueIdentifier>{5d454d94-4dfa-49b1-b8a6-17f53d32ae52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EventImplementations">
+      <UniqueIdentifier>{3adbdcc1-5e6d-4deb-ad2c-0d5b8cba2360}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\FilterImplementations">
+      <UniqueIdentifier>{5cfa6520-4b73-4ab0-9b60-89a8f9ff8b4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\OrientImplementations">
+      <UniqueIdentifier>{04b30af6-3154-473f-8fa3-4378719376e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RiftImplementations">
+      <UniqueIdentifier>{e4061b59-9d06-4544-9359-121ba05c08a8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="filter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RVC.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EventInterfacing.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EventInterfacing1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OrientationList.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Samples.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EventInterfacing.cpp">
+      <Filter>Source Files\EventImplementations</Filter>
+    </ClCompile>
+    <ClCompile Include="EventInterfacing1.cpp">
+      <Filter>Source Files\EventImplementations</Filter>
+    </ClCompile>
+    <ClCompile Include="filter.cpp">
+      <Filter>Source Files\FilterImplementations</Filter>
+    </ClCompile>
+    <ClCompile Include="OrientationList.cpp">
+      <Filter>Source Files\OrientImplementations</Filter>
+    </ClCompile>
+    <ClCompile Include="RVC.cpp">
+      <Filter>Source Files\RiftImplementations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="filter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EulerAngles.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RVCInterface.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EventInterface.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Event</Filter>
     </ClInclude>
     <ClInclude Include="EventInterfacing.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Event</Filter>
     </ClInclude>
     <ClInclude Include="EventInterfacing1.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Event</Filter>
     </ClInclude>
-    <ClInclude Include="RVC.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OrientationList.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="EulerAngles.h">
+      <Filter>Header Files\EulerAngles</Filter>
     </ClInclude>
     <ClInclude Include="OListInterface.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\VirtOrient</Filter>
+    </ClInclude>
+    <ClInclude Include="OrientationList.h">
+      <Filter>Header Files\VirtOrient</Filter>
+    </ClInclude>
+    <ClInclude Include="RVC.h">
+      <Filter>Header Files\Rift</Filter>
+    </ClInclude>
+    <ClInclude Include="RVCInterface.h">
+      <Filter>Header Files\Rift</Filter>
+    </ClInclude>
+    <ClInclude Include="filter.h">
+      <Filter>Header Files\Filters</Filter>
     </ClInclude>
     <ClInclude Include="Samples.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Samples</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="OList.txt">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

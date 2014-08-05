@@ -2,7 +2,9 @@
 #define EVENTINTERFACE_H
 #include <vector>
 #include "RVCInterface.h"
+#include "Pedometer.h"
 #include "OrientationList.h"
+
 class IEvent
 {
 public:
@@ -65,17 +67,7 @@ public:
 			if (walking) return true
 			else return false
 	*/
-	virtual bool pedometer(IRift * rift) = 0;
-
-	/*
-	 Pedometer using accelerometer in the Oculus Rift. 
-	
-	 @return
-		Returns true if the person is walking and returns false if the person is not
-			if (walking) return true
-			else return false
-	*/
-	virtual bool pedometer() = 0;
+	virtual bool pedometer(IRift * rift, Pedometer &pedo) = 0;
 
 	// This (move) is likely the function that will change the most if future interns are able to establish a direct connection to OpenSim
 	// or build a viewer. Much of the other algorithms should require NO change and future interns should be careful

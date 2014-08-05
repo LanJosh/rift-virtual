@@ -1,6 +1,6 @@
 #ifndef FILTER_H
 #define FILTER_H
-#include "RVCInterface.h"
+#include "RVC.h"
 
 /*
 * A complementary filter for the readings from the accelerometer and gyroscope.
