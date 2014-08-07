@@ -1,76 +1,12 @@
 #include "EventInterfacing1.h"
 
-EventInterfacing1::EventInterfacing1(IRift *connection, float accThreshold, float deccThreshold)
+EventInterfacing1::EventInterfacing1()
 {
-	this->rift = connection;
-	this->walkAcc = accThreshold;
-	this->walkDecc = deccThreshold;
 }
 
 EventInterfacing1::~EventInterfacing1()
 {
-	this->rift->clear();
 }
-/*
- Sets threshold values for acceleration and decceleration.
-*/
-void EventInterfacing1::setThreshold(float acc, float decc)
-{
-	this->walkAcc = acc;
-	this->walkDecc = decc;
-}
-
-/*
-  Orients virtual body in response to the head position recorded
-  by the Oculus Rift.
- */
-void EventInterfacing1::orientBody(IList *orientation)
-{
-	// 15 degree change in yaw orientation corresponds to one keystroke in OpenSim
-	const int DEGREE_RATIO = 15;
-	// Determine position
-	EulerAngles ang = this->rift->RawEulerAngles();
-
-	// Change to position in list. We do this in order to create feasible
-	// thresholds--the Oculus is too sensitive for each degrees. The integer division
-	// here is intended. The reason for this is important and is left to you 
-	// to figure out (but is pretty simple).
-	int pos = OVR::RadToDegree(ang.yaw) / DEGREE_RATIO;
-
-	// Determine position as modeled in the list
-	int currPos = orientation->position();
-	// If we are ahead in the list, retreat until we are oriented.
-	while (currPos < pos)
-	{
-		orientation->retreat();
-		currPos = orientation->position();
-	}  
-
-	// If we are behind in the list, advance until we are oriented.
-	while (currPos > pos)
-	{
-		orientation->advance();
-		currPos = orientation->position();
-	};
-};
-
-/*
- Finds and returns threshold values for acceleration to walking.
-*/
-float EventInterfacing1::findAccelerationThreshold(std::vector<float> accData)
-{
-	// TODO write algorithm to quickly find a threshold for beginning walking from a vector.
-	return 0;
-};
-
-/*
- Finds and returns threshold values for decceleration to stop.
-*/
-float EventInterfacing1::findDeccelerationThreshold(std::vector<float> accData)
-{
-	// TODO write algorithm to quickly find threshold for decceleration.
-	return 0;
-};
 
 /*
  Simple implementation of movement in OpenSim. If threshold values are broken, we
@@ -84,19 +20,9 @@ void EventInterfacing1::move()
 	ip.ki.time = 0;
 	ip.ki.dwExtraInfo = 0;
 
-	float zAccel = this->rift->CorrectedAcceleration().z;
-	// If we detect acceleration, assume walking until we detect deceleration
-	if (zAccel < this->walkAcc)
-	{
-		// Once we detected decceleration, stop walking.
-		while (zAccel < this->walkDecc)
-		{
-			ip.ki.wVk = 0x57;
-			ip.ki.dwFlags = 0;
-			SendInput(1, &ip, sizeof(INPUT));
-			zAccel = this->rift->CorrectedAcceleration().z;
-		}
-	}
+	ip.ki.wVk = 0x57;
+	ip.ki.dwFlags = 0;
+	SendInput(1, &ip, sizeof(INPUT));
 
 	//Release key
 	ip.ki.dwFlags = KEYEVENTF_KEYUP;
@@ -104,80 +30,56 @@ void EventInterfacing1::move()
 };
 
 /*
-  Orients virtual body in response to the head position recorded
-  by the Oculus Rift.
- */
-void EventInterfacing1::orientBody(IList *orientation)
-{
-	// 15 degree change in yaw orientation corresponds to one keystroke in OpenSim
-	const int DEGREE_RATIO = 15;
-
-	// Determine position
-	EulerAngles ang = this->rift->RawEulerAngles();
-
-	// Change to position in list. We do this in order to create feasible
-	// thresholds--the Oculus is too sensitive for each degrees. The integer division
-	// here is intended. The reason for this is important and is left to you 
-	// to figure out (but is pretty simple).
-	int pos = ang.yaw / DEGREE_RATIO;
-
-	// Determine position as modeled in the list
-	int currPos = orientation->position();
-
-	// If we are ahead in the list, retreat until we are oriented.
-	while (currPos < pos)
-	{
-		orientation->retreat();
-	}  
-
-	// If we are behind in the list, advance until we are oriented.
-	while (currPos > pos)
-	{
-		orientation->advance();
-	};
-};
-
-/*
- Pedometer using accelerometer in the Oculus Rift. 
+* Pedometer using accelerometer in the Oculus Rift.
+*
+* @return
+*	Returns true if the person is walking and returns false if the person is not
+*		if (walking) return true
+*		else return false
+*
+* @param rift
+*	An instance of the Rift interfacing class
+*
+* @param pedo
+*	An instance of the Pedometer class
 */
 bool EventInterfacing1::pedometer(IRift *pRift, Pedometer &pedo)
 {
-	const float precision = 0.15; // A predetermined precision to filter the high frequency noise data.  May be adjusted or calibrated
+	const float precision = 0.55; // A predetermined precision to filter the high frequency noise data.  May be adjusted or calibrated
 	bool step = false; // Return value whether or not a step has been taken
 
 	// Sample the accelerometer
-	float sampleResult = pRift->RawAcceleration().z;
+	float sampleAcc = pRift->RawAcceleration().z;
 
 	// Check change in acceleration against a predifined precision
 	// If the change is too small, ignore it to smooth the high frequency noise
-	if(abs(sampleResult - pedo.getNewAcc()) > precision)
+	if (abs(sampleAcc - pedo.getNewAcc()) > precision)
 	{
-		pedo.setNewAcc(sampleResult);
-	}
+		pedo.setNewAcc(sampleAcc);
 
 	// If the new acceleration is lower than the current min, then update the min to the new acc
 	// After a few readings, the accelerometer starts to drift positively
 	// When the drift occurs, the min must start trailing the max upward or else
 	// the dynamic threshold level will be thrown off by an increasing max and a stagnant min
-	if(pedo.getNewAcc() < pedo.getMin())
+	if (pedo.getNewAcc() < pedo.getMin())
 	{
 		pedo.updateMin(pedo.getNewAcc());
 	}
-	else if(pedo.getDTD() > pedo.getDTL() - pedo.getMin())
+	else if (pedo.getCTD() > pedo.getDTL() - pedo.getMin())
 	{
-		pedo.updateMin(pedo.getMax() - 2 * pedo.getDTD());
+		pedo.updateMin(pedo.getMax() - 2 * pedo.getCTD());
 	}
 
 	// If the new acceleration is greater than the current max, then update the max to the new acc
 	// Also store the one most previous max reading
-	if(pedo.getNewAcc() > pedo.getMax())
+	if (pedo.getNewAcc() > pedo.getMax())
 	{
 		pedo.maxToMaxPrev();
 		pedo.updateMax(pedo.getNewAcc());
 	}
 
 	// Index the counter
-	if(pedo.getLoopCounter() < 60)
+	if (pedo.getLoopCounter() < 60)
 	{
 		pedo.indexLoopCounter();
 	}
@@ -186,21 +88,128 @@ bool EventInterfacing1::pedometer(IRift *pRift, Pedometer &pedo)
 		// Update the dynamic threshold level every 50 cycles and reset the counter to 0
 		pedo.updateDTL();
 		//Calibrated the CTD
-		if(pedo.getMax()<2)
+		if (pedo.getMax()<2)
 		{
-			pedo.updateDTD();
+			pedo.updateCTD();
 		}
 		pedo.resetLoopCounter();
 	}
 
-	if(pedo.getNewAcc() < pedo.getOldAcc() && pedo.getNewAcc() < pedo.getDTL() && pedo.getOldAcc() > pedo.getDTL())
+	if (pedo.getNewAcc() < pedo.getOldAcc() && pedo.getNewAcc() < pedo.getDTL() && pedo.getOldAcc() > pedo.getDTL())
 	{
 		step = true;
 	}
-
+	}
 	// Store the acceleration value for the next cylce by copying NewAcc to OldAcc
-	pedo.newToOld();
+	pedo.newToOldAcc();
 
 	return step;
-	return false;
+};
+
+/*
+* turn uses the gyrscope to decide whether the person has turned
+* and which direction they have turned
+*
+* @return
+*	Returns 0 if the person has not turned, 1 if the person has turned left, 2 if the person has turned right
+*
+* @param rift
+*	An instance of the Rift interfacing class
+*
+* @param pedo
+*	An instance of the Pedometer class
+*/
+void EventInterfacing1::turn(IRift *pRift, Pedometer &pedo)
+{
+	const float precision = 0.0698; // Predetermined precision to reduce noise from gyroscope (10 degrees)
+	float sampleYaw = pRift->RawEulerAngles().yaw; // Sample the yaw angle from the gyroscope
+	const float convert = 5000 /6.28; // Based on 5000 milliseconds per 2pi radians
+	int turn; // Variable for determining how long to turn by converting radians to milliseconds
+	
+	// Set up keyboard input for movement
+	INPUT ip;
+	ip.type = INPUT_KEYBOARD;
+	ip.ki.wScan = 0;
+	ip.ki.time = 0;
+	ip.ki.dwExtraInfo = 0;
+
+	if (abs(sampleYaw - pedo.getOldYaw()) > precision)
+	{
+		if (pedo.getOldYaw() < sampleYaw)
+		{
+			if (pedo.getOldYaw() < -3 && sampleYaw > 3)
+			{
+				// std::cout << "R1" << std::endl;
+				// Convert radians to degrees
+				turn = 2 * (3.14 - abs(pedo.getOldYaw()) + 3.14 - abs(sampleYaw)) * convert;
+			
+				// Turn right
+				// Press d key
+				ip.ki.wVk = 0x44;
+				ip.ki.dwFlags = 0;
+				SendInput(1, &ip, sizeof(INPUT));
+				// Sleep program for as long as needed to turn the correct distance
+				Sleep(turn);
+				//Release key
+				ip.ki.dwFlags = KEYEVENTF_KEYUP;
+				SendInput(1, &ip, sizeof(INPUT));
+			}
+			else
+			{
+				// std::cout << "L2" << std::endl;
+				// Convert from radians to milliseconds
+				turn = abs(sampleYaw - pedo.getOldYaw()) * convert;
+
+				// Turn left
+				// Press a key
+				ip.ki.wVk = 0x41;
+				ip.ki.dwFlags = 0;
+				SendInput(1, &ip, sizeof(INPUT));
+				// Sleep program for as long as needed to turn the correct distance
+				Sleep(turn);
+				//Release key
+				ip.ki.dwFlags = KEYEVENTF_KEYUP;
+				SendInput(1, &ip, sizeof(INPUT));
+			}
+		}
+		else if (pedo.getOldYaw() > sampleYaw)
+		{
+			if (pedo.getOldYaw() > 3 && sampleYaw < -3)
+			{
+				// std::cout << "L1" << std::endl;
+				// Convert from radians to milliseconds
+				turn = 2 * (3.14 - abs(pedo.getOldYaw()) + 3.14 - abs(sampleYaw)) * convert;
+				
+				// Turn left
+				// Press a key
+				ip.ki.wVk = 0x41;
+				ip.ki.dwFlags = 0;
+				SendInput(1, &ip, sizeof(INPUT));
+				// Sleep program for as long as needed to turn the correct distance
+				Sleep(turn);
+				//Release key
+				ip.ki.dwFlags = KEYEVENTF_KEYUP;
+				SendInput(1, &ip, sizeof(INPUT));
+			}
+			else
+			{
+				// std::cout << "R2" << std::endl;
+				// Convert radians to milliseconds
+				turn = abs(pedo.getOldYaw() - sampleYaw) * convert;
+				// Turn right
+				// Press d key
+				ip.ki.wVk = 0x44;
+				ip.ki.dwFlags = 0;
+				SendInput(1, &ip, sizeof(INPUT));
+				// Sleep program for as long as needed to turn the correct distance
+				Sleep(turn);
+				//Release key
+				ip.ki.dwFlags = KEYEVENTF_KEYUP;
+				SendInput(1, &ip, sizeof(INPUT));
+			}
+		}
+
+		// Update OldYaw
+		pedo.newToOldYaw(sampleYaw);
+	}
 };

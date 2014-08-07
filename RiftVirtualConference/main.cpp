@@ -9,6 +9,11 @@
 
 int main()
 {
-	IRift *pRift = new RVC();
-	IEvent *pEvent = new EventInterfacing(pRift, (float) -1, (float) -1.5);
+	// Orientation();
+	// Acceleration();
+	// PeakAnalysisDemo();
+	// PeakAnalysisWithListHeadtrackingDemo();
+	// HeadtrackingWithList();
+	// PedometerDemo();
+	// RiftRoboeyes();
 };

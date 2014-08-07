@@ -13,14 +13,8 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Event">
-      <UniqueIdentifier>{402e18ff-bb16-4f29-ae1f-e4e79cf72a35}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\EulerAngles">
       <UniqueIdentifier>{7cf45be3-322e-4155-bfa0-65d5aa839615}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\VirtOrient">
-      <UniqueIdentifier>{e63f4f75-cd25-408e-8f7b-d3fc23939afa}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Rift">
       <UniqueIdentifier>{b31c14f9-249a-46cc-a7f8-f9f48b64ddfb}</UniqueIdentifier>
@@ -31,16 +25,37 @@
     <Filter Include="Header Files\Samples">
       <UniqueIdentifier>{5d454d94-4dfa-49b1-b8a6-17f53d32ae52}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\EventImplementations">
+    <Filter Include="Header Files\Events">
+      <UniqueIdentifier>{402e18ff-bb16-4f29-ae1f-e4e79cf72a35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Events\Interfaces">
+      <UniqueIdentifier>{425a77aa-16e3-401e-9ea9-1af4bcd1925a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Events\Interfaces\Thesh">
+      <UniqueIdentifier>{769dc109-73d4-4b8c-9e9f-fa2fee42dee5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Events\Interfaces\Pedo">
+      <UniqueIdentifier>{d30a4e39-f545-416d-86ac-ecbae1738e20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Events\Pedometer">
+      <UniqueIdentifier>{d0475bdb-3cc3-494a-ba21-96b96334e918}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Events\VirtOrient">
+      <UniqueIdentifier>{e63f4f75-cd25-408e-8f7b-d3fc23939afa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Event">
       <UniqueIdentifier>{3adbdcc1-5e6d-4deb-ad2c-0d5b8cba2360}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\FilterImplementations">
+    <Filter Include="Source Files\Filter">
       <UniqueIdentifier>{5cfa6520-4b73-4ab0-9b60-89a8f9ff8b4b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\OrientImplementations">
+    <Filter Include="Source Files\Orient">
       <UniqueIdentifier>{04b30af6-3154-473f-8fa3-4378719376e7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\RiftImplementations">
+    <Filter Include="Source Files\Pedo">
+      <UniqueIdentifier>{b235f79b-bc3e-4263-8ef4-9e451f6da3ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Rift">
       <UniqueIdentifier>{e4061b59-9d06-4544-9359-121ba05c08a8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -52,39 +67,36 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EventInterfacing.cpp">
-      <Filter>Source Files\EventImplementations</Filter>
+      <Filter>Source Files\Event</Filter>
     </ClCompile>
     <ClCompile Include="EventInterfacing1.cpp">
-      <Filter>Source Files\EventImplementations</Filter>
+      <Filter>Source Files\Event</Filter>
     </ClCompile>
     <ClCompile Include="filter.cpp">
-      <Filter>Source Files\FilterImplementations</Filter>
+      <Filter>Source Files\Filter</Filter>
     </ClCompile>
     <ClCompile Include="OrientationList.cpp">
-      <Filter>Source Files\OrientImplementations</Filter>
+      <Filter>Source Files\Orient</Filter>
     </ClCompile>
     <ClCompile Include="RVC.cpp">
-      <Filter>Source Files\RiftImplementations</Filter>
+      <Filter>Source Files\Rift</Filter>
+    </ClCompile>
+    <ClCompile Include="Pedometer.cpp">
+      <Filter>Source Files\Pedo</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EventInterface.h">
-      <Filter>Header Files\Event</Filter>
-    </ClInclude>
     <ClInclude Include="EventInterfacing.h">
-      <Filter>Header Files\Event</Filter>
+      <Filter>Header Files\Events</Filter>
     </ClInclude>
     <ClInclude Include="EventInterfacing1.h">
-      <Filter>Header Files\Event</Filter>
+      <Filter>Header Files\Events</Filter>
     </ClInclude>
     <ClInclude Include="EulerAngles.h">
       <Filter>Header Files\EulerAngles</Filter>
     </ClInclude>
-    <ClInclude Include="OListInterface.h">
-      <Filter>Header Files\VirtOrient</Filter>
-    </ClInclude>
     <ClInclude Include="OrientationList.h">
-      <Filter>Header Files\VirtOrient</Filter>
+      <Filter>Header Files\Events\VirtOrient</Filter>
     </ClInclude>
     <ClInclude Include="RVC.h">
       <Filter>Header Files\Rift</Filter>
@@ -97,6 +109,21 @@
     </ClInclude>
     <ClInclude Include="Samples.h">
       <Filter>Header Files\Samples</Filter>
+    </ClInclude>
+    <ClInclude Include="Pedometer.h">
+      <Filter>Header Files\Events\Pedometer</Filter>
+    </ClInclude>
+    <ClInclude Include="IPedo.h">
+      <Filter>Header Files\Events\Interfaces\Pedo</Filter>
+    </ClInclude>
+    <ClInclude Include="IEvent.h">
+      <Filter>Header Files\Events\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="IThresh.h">
+      <Filter>Header Files\Events\Interfaces\Thesh</Filter>
+    </ClInclude>
+    <ClInclude Include="OListInterface.h">
+      <Filter>Header Files\Events\Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

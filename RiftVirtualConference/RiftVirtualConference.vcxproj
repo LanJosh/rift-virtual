@@ -85,17 +85,21 @@
     <ClCompile Include="filter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OrientationList.cpp" />
+    <ClCompile Include="Pedometer.cpp" />
     <ClCompile Include="RVC.cpp" />
     <ClCompile Include="Samples.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EulerAngles.h" />
-    <ClInclude Include="EventInterface.h" />
+    <ClInclude Include="IEvent.h" />
     <ClInclude Include="EventInterfacing.h" />
     <ClInclude Include="EventInterfacing1.h" />
     <ClInclude Include="filter.h" />
+    <ClInclude Include="IPedo.h" />
+    <ClInclude Include="IThresh.h" />
     <ClInclude Include="OListInterface.h" />
     <ClInclude Include="OrientationList.h" />
+    <ClInclude Include="Pedometer.h" />
     <ClInclude Include="RVC.h" />
     <ClInclude Include="RVCInterface.h" />
     <ClInclude Include="Samples.h" />

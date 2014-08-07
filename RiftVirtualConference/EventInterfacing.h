@@ -1,8 +1,9 @@
 #ifndef EVENINTERFACING_H
 #define EVENTINTERFACING_H
-#include "EventInterface.h"
+#include "IEvent.h"
+#include "IThresh.h"
 
-class EventInterfacing : public IEvent
+class EventInterfacing : public IThresh
 {
 private:
 	float walkAcc;
@@ -10,8 +11,14 @@ private:
 	IRift * rift;
 
 public:
+	/*
+	 Constructor
+	*/
 	EventInterfacing::EventInterfacing(IRift *connection, float accThreshold, float deccThreshold);
 
+	/*
+	 Destructor
+	*/
 	EventInterfacing::~EventInterfacing();
 
 	/*
@@ -38,11 +45,5 @@ public:
 	 Orients virtual body.
 	*/
 	void orientBody(IList *orientation);
-
-	/*
-	 Returns true if walking and false if not
-	*/
-	bool pedometer(IRift * rift, Pedometer &pedo);
-
 };
 #endif

@@ -108,28 +108,15 @@ void EventInterfacing::orientBody(IList *orientation)
 	while (currPos > pos)
 	{
 		orientation->retreat();
+		currPos = orientation->position();
 	}  
 
 	// If we are behind in the list, advance until we are oriented.
 	while (currPos < pos)
 	{
 		orientation->advance();
+		currPos = orientation->position();
 	};
 };
 
-bool EventInterfacing::pedometer()
-{
-	// TODO add pedometer algorithm
-
-	// Added just to make code compile
-	return false;
-};
-
-bool EventInterfacing::pedometer(IRift * rift)
-{
-	// TODO add pedometer algorithm
-
-	// Added just to make code compile
-	return false;
-};
 	
