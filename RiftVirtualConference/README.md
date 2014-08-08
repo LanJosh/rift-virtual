@@ -10,8 +10,7 @@ Department of Energy and USAFRL
 
 --------------------------------------------------------------------------------------
 Revision History
---------------------------------------------------------------------------------------   
-		  |			        |
+--------------------------------------------------------------------------------------
 YYYY/MM/DD| Author          | Description
 ----------|-----------------|-------------------------------------------------------
 2014/08/08|Joshua Lan		| Final refactoring from SATE 2014. 
@@ -90,21 +89,19 @@ environment Discovery Lab is. In order to allow future Rift teams to bypass some
 headaches RVC 2014 ran into, here is a compiled list of tips for reading/using the code
 base, making good changes, and getting acclimated to the high speed of DLab.
 
-1. ###NAMING CONVENTIONS:
+1. NAMING CONVENTIONS:
 I used Apps-Hungarian notation to show attributes of objects to ensure the team would
 be able to notice all dangers/match types. I suggest that future teams do the same. 
 For example, 'p' is prefixed to all pointers in our codebase. Pointers are tricky, and
 it is certainly not a bad idea to take note of where they are, so adding a 'p' can save
 time. But adding an 'i' infront of every int is mostly likely overkill (if you can see
-where it would not be, you probably don't need me to explain Apps-Hungarian). 
+where it would not be, you probably don't need me to explain Apps-Hungarian).Think through 
+variable names (well pretty much all names). Google's C++ code style conventions 
+(http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml)are a good place to read some 
+more about this. It may take time to think about a variable name through the scope of many different 
+devs eyes but it will pay off in the end.
 
-Think through variable names (well pretty much all names). Google's C++ code style 
-conventions (http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml)
-are a good place to read some more about this. It may take time to think
-about a variable name through the scope of many different devs eyes but it will pay 
-off in the end.
-
-2. ###DEVELOPMENT STRUCTURE:
+2. DEVELOPMENT STRUCTURE:
 We used the Agile Development framework and it worked fairly well to our favor. I 
 suggest using a framework that incorportates contact with other teams and frequently
 updates the Director to make sure the direction is good and you can draw upon the 
@@ -118,7 +115,7 @@ and refactor/optimize when you have down time.
 take note of the situation you are in before you do something. This is simply something
 that worked for us at Discovery Lab. 
 
-3. ###CODING STRUCTURE:
+3. CODING STRUCTURE:
 This was discussed earlier, but highly segmented code works very well at Discovery Lab with
 how much project scope changes and with visitors frequently coming in, expected demonstrations.
 With this need to be so quickly adaptable and able to throw things together, having code that 
