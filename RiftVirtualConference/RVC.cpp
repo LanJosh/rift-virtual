@@ -64,7 +64,7 @@ using namespace OVR;
 	};
 
 	/*
-	 Returns a struct of yaw, pitch, and roll. 
+	 Returns a structure containing yaw, pitch, and roll. 
 		
 	 For future interns: This is probably not going to be used for anything past testing purposes,
 	 though it should be used extensively during testing for getting Euler angles and printing them
@@ -90,7 +90,7 @@ using namespace OVR;
 	 convention. This should almost never be called outside of testing.
 	 Keep in mind that this is NOT corrected for gravity. Be sure to understand
 	 the Equivalence Principle before attempting to use this or you will likely
-	 receive bad results
+	 receive data you did not expect.
 	*/
 	Vector3f RVC::RawAcceleration()
 	{

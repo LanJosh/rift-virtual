@@ -15,6 +15,8 @@ void OList::advance()
 	SendInput(1, &ip, sizeof(INPUT));
 	this->ip.ki.dwFlags = KEYEVENTF_KEYUP;
 	SendInput(1, &ip, sizeof(INPUT));
+
+	// TODO change list sizes to reflect new orientation
 };
 
 void OList::retreat()
@@ -27,6 +29,8 @@ void OList::retreat()
 	SendInput(1, &ip, sizeof(INPUT));
 	this->ip.ki.dwFlags = KEYEVENTF_KEYUP;
 	SendInput(1, &ip, sizeof(INPUT));
+
+	// TODO change list sizes to reflect new orientation
 };
 
 OList::OList()

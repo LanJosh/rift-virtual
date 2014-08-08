@@ -1,6 +1,6 @@
 #ifndef RVC_H
 #define RVC_H
-#include "RVCInterface.h"
+#include "IRIFT.h"
 #include <string>
 #include <utility>
 #include <iostream>

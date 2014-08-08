@@ -57,14 +57,14 @@ bool EventInterfacing1::pedometer(IRift *pRift, Pedometer &pedo)
 	{
 		pedo.setNewAcc(sampleAcc);
 
-	// If the new acceleration is lower than the current min, then update the min to the new acc
-	// After a few readings, the accelerometer starts to drift positively
-	// When the drift occurs, the min must start trailing the max upward or else
-	// the dynamic threshold level will be thrown off by an increasing max and a stagnant min
-	if (pedo.getNewAcc() < pedo.getMin())
-	{
-		pedo.updateMin(pedo.getNewAcc());
-	}
+		// If the new acceleration is lower than the current min, then update the min to the new acc
+		// After a few readings, the accelerometer starts to drift positively
+		// When the drift occurs, the min must start trailing the max upward or else
+		// the dynamic threshold level will be thrown off by an increasing max and a stagnant min
+		if (pedo.getNewAcc() < pedo.getMin())
+		{
+			pedo.updateMin(pedo.getNewAcc());
+		}
 	else if (pedo.getCTD() > pedo.getDTL() - pedo.getMin())
 	{
 		pedo.updateMin(pedo.getMax() - 2 * pedo.getCTD());
